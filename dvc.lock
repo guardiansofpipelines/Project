@@ -15,3 +15,14 @@ stages:
       md5: e207e6b19d7e3e99beea461dfb487198
       size: 2770
 
+  preprocess:
+    cmd: python src/datapreprocessing.py data/preprocessed/train/ data/preprocessed/test/
+    deps:
+    - path: data/dummy_data/dummy_sensor_data.csv
+      hash: md5
+      md5: cf3fb143538b41ebd732c29552a42457
+      size: 211721
+    - path: src/datapreprocessing.py
+      hash: md5
+      md5: a4f1d82baa09ddbe5d163d6944c14be1
+      size: 2847

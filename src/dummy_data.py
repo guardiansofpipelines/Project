@@ -54,7 +54,7 @@ def generate_dummy_data(start_date, end_date, num_machines=5, num_sensors=3, fre
     return pd.DataFrame(data)
 
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     output_path = sys.argv[1]
     choice = sys.argv[2]
     data_file_path = output_path+"/"+'dummy_sensor_data.csv'

@@ -1,0 +1,9 @@
+schema: '2.0'
+stages:
+  collect:
+    cmd: python src/dummy_data.py data/ create
+    deps:
+    - path: src/dummy_data.py
+      hash: md5
+      md5: 81b6d982eaec613edee4816906c9f647
+      size: 2783

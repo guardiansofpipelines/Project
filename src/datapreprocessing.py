@@ -47,7 +47,6 @@ def split_dataframe(dataframe, split_ratio):
     return train_dataframe, test_dataframe
 
 
-
 def perform_data_processing():
     print("Performing generic data processing")
 
@@ -56,8 +55,8 @@ def perform_data_processing():
     test_output_file = sys.argv[2]
     
     # Load raw data from a CSV file
-    file_path = "data/dummy_data/dummy_sensor_data.csv"
-    dataframe = load_and_read_data(file_path)
+    input_file_path = "data/dummy_data/dummy_sensor_data.csv"
+    dataframe = load_and_read_data(input_file_path)
     
     # Preprocess sensor values
     dataframe = preprocess_dataframe(dataframe)

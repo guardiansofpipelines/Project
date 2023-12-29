@@ -54,10 +54,10 @@ def generate_dummy_data(start_date, end_date, num_machines=5, num_sensors=3, fre
     return pd.DataFrame(data)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     output_path = sys.argv[1]
     choice = sys.argv[2]
-    data_file_path = output_path+"/"+'data'+"/"+'dummy_data.csv'
+    data_file_path = output_path+"/"+'dummy_sensor_data.csv'
     # Define date range for dummy data
 start_date = datetime(2023, 1, 1)
 end_date = datetime(2023, 1, 10)
@@ -66,7 +66,7 @@ end_date = datetime(2023, 1, 10)
 if (choice == 'create'):
     print("Creating dummy data")
     dummy_data = generate_dummy_data(start_date, end_date, num_machines=5, num_sensors=3)
-    dummy_data.to_csv('dummy_sensor_data.csv', index=False)
+    dummy_data.to_csv(data_file_path, index=False)
 
 elif(choice == 'append'):
     print("Appending data")

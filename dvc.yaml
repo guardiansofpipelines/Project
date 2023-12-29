@@ -1,5 +1,15 @@
 stages:
-  collect:
-    cmd: python src/dummy_data.py data/ create
+  generate:
+    cmd: python src/dummy_data.py data/dummy_data create
     deps:
       - src/dummy_data.py
+  append:
+    cmd: python src/dummy_data.py data/dummy_data append
+    deps:
+      - src/dummy_data.py
+
+  preprocess:
+    cmd: python src/datapreprocessing.py data/preprocessed/train/ data/preprocessed/test/
+    deps:
+      - src/datapreprocessing.py
+      - data/dummy_data/dummy_sensor_data.csv

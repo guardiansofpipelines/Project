@@ -1,9 +1,17 @@
 schema: '2.0'
 stages:
-  collect:
-    cmd: python src/dummy_data.py data/ create
+  generate:
+    cmd: python src/dummy_data.py data/dummy_data create
     deps:
     - path: src/dummy_data.py
       hash: md5
-      md5: 81b6d982eaec613edee4816906c9f647
-      size: 2783
+      md5: e207e6b19d7e3e99beea461dfb487198
+      size: 2770
+  append:
+    cmd: python src/dummy_data.py data/dummy_data append
+    deps:
+    - path: src/dummy_data.py
+      hash: md5
+      md5: e207e6b19d7e3e99beea461dfb487198
+      size: 2770
+

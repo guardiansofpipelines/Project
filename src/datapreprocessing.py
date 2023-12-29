@@ -51,8 +51,8 @@ def perform_data_processing():
     print("Performing generic data processing")
 
     # Load the file paths for training and testing output
-    train_output_file = sys.argv[1]
-    test_output_file = sys.argv[2]
+    train_output_file = sys.argv[1]+"train.csv"
+    test_output_file = sys.argv[2]+"test.csv"
     
     # Load raw data from a CSV file
     input_file_path = "data/dummy_data/dummy_sensor_data.csv"

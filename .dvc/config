@@ -1,0 +1,5 @@
+[core]
+    remote = guardiansofpipelines
+['remote "guardiansofpipelines"']
+    url = gdrive://1ZM8UqucJ4akhO7-TEgL1nTP_qudVNqsX
+    gdrive_acknowledge_abuse = true

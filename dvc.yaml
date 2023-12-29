@@ -1,5 +1,5 @@
 stages:
-  collect:
-    cmd: python src/dummy_data.py data/ create
+  generate:
+    cmd: python src/dummy_data.py data/dummy_data create
     deps:
       - src/dummy_data.py

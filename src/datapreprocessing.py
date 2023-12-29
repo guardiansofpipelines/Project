@@ -9,28 +9,33 @@ def load_and_read_data(file_path):
     return pd.read_csv(file_path)
 
 def preprocess_dataframe(dataframe):
-    # Use MinMaxScaler to normalize 'SensorValue'
+    # Use MinMaxScaler to normalize 'Reading'
     scaler = preprocessing.MinMaxScaler()
-    scaled_values = scaler.fit_transform(dataframe['SensorValue'].values.reshape(-1, 1))
-    dataframe['SensorValue'] = scaled_values
+    scaled_values = scaler.fit_transform(dataframe['Reading'].values.reshape(-1, 1))
+    dataframe['Reading'] = scaled_values
 
     # Drop rows with missing values and unnecessary columns
     dataframe = dataframe.dropna() 
-    dataframe = dataframe.drop(columns=['DeviceID', 'SensorID'])
+    dataframe = dataframe.drop(columns=['Machine_ID', 'Sensor_ID'])
 
-    # Convert 'RecordTime' to datetime format and extract additional features
-    dataframe['RecordTime'] = pd.to_datetime(dataframe['RecordTime'])
-    dataframe['hour_of_day'] = dataframe['RecordTime'].dt.hour
-    dataframe['day_of_week'] = dataframe['RecordTime'].dt.dayofweek
-    dataframe['year'] = dataframe['RecordTime'].dt.year
+    # Convert 'Timestamp' to datetime format and extract additional features
+    dataframe['Timestamp'] = pd.to_datetime(dataframe['Timestamp'])
+    dataframe['hour'] = dataframe['Timestamp'].dt.hour
+    dataframe['day'] = dataframe['Timestamp'].dt.dayofweek
+    dataframe['year'] = dataframe['Timestamp'].dt.year
 
     return dataframe
 
+
 def split_dataframe(dataframe, split_ratio):
-    # Split the dataframe into features and labels, and perform one-hot encoding
-    features = dataframe.drop('SensorValue', axis=1)
-    label = dataframe['SensorValue']
-    features = pd.get_dummies(features)  # one-hot encoding categorical variables
+    # Assuming 'Reading' is the target variable
+    label = dataframe['Reading']
+
+    # Drop the target variable and other unnecessary columns
+    features = dataframe.drop(['Reading'], axis=1)
+
+    # Perform one-hot encoding for categorical variables
+    features = pd.get_dummies(features)
 
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(features, label, test_size=split_ratio, random_state=42)
@@ -41,6 +46,8 @@ def split_dataframe(dataframe, split_ratio):
 
     return train_dataframe, test_dataframe
 
+
+
 def perform_data_processing():
     print("Performing generic data processing")
 
@@ -49,14 +56,14 @@ def perform_data_processing():
     test_output_file = sys.argv[2]
     
     # Load raw data from a CSV file
-    file_path = "data/raw/sensor_data.csv"
+    file_path = "data/dummy_data/dummy_sensor_data.csv"
     dataframe = load_and_read_data(file_path)
     
     # Preprocess sensor values
     dataframe = preprocess_dataframe(dataframe)
     
     # Split data into training and testing sets
-    split_ratio = yaml.safe_load(open('src/generic_params.yaml'))['prepare']['split']
+    split_ratio = yaml.safe_load(open('src/parameters.yaml'))['prepare']['split']
     train_dataframe, test_dataframe = split_dataframe(dataframe, split_ratio)
     
     # Write the processed data to CSV files

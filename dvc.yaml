@@ -11,5 +11,5 @@ stages:
   preprocess:
     cmd: python src/datapreprocessing.py data/preprocessed/train/ data/preprocessed/test/
     deps:
-      - src/preprocess.py
+      - src/datapreprocessing.py
       - data/dummy_data/dummy_sensor_data.csv

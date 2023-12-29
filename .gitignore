@@ -1,3 +1,3 @@
 venv/
 mlruns/
-dummy_sensor_data.csv.dvc
+data/dummy_data/dummy_sensor_data.csv

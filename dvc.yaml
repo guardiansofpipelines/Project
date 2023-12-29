@@ -1,0 +1,20 @@
+stages:
+  collect:
+    cmd: python src/random_data.py data/raw generate
+    deps:
+      - src/random_data.py
+
+  prepare:
+    cmd: python src/prepare_data.py data/prepared/train/train.csv data/prepared/test/test.csv
+    deps:
+      - src/prepare_data.py
+
+  train:
+    cmd: python src/train.py data/prepared/train/train.csv data/prepared/test/test.csv
+    deps: 
+    - src/train.py
+
+  deploy:
+    cmd: sudo docker build -t predictive_maintenance_app . 
+    deps: 
+    - dockerfile 

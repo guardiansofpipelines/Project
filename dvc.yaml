@@ -3,3 +3,8 @@ stages:
     cmd: python src/dummy_data.py data/dummy_data create
     deps:
       - src/dummy_data.py
+  append:
+    cmd: python src/dummy_data.py data/dummy_data append
+    deps:
+      - src/dummy_data.py
+      

@@ -1,3 +1,5 @@
 venv/
 mlruns/
 data/dummy_data/dummy_sensor_data.csv
+data/preprocessed/test/test.csv
+data/preprocessed/train/train.csv

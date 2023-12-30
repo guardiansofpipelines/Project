@@ -6,3 +6,4 @@ pylint
 dvc-gdrive
 mlflow
 keras
+wget

@@ -14,7 +14,7 @@ stages:
       - src/datapreprocessing.py
       - data/dummy_data/dummy_sensor_data.csv
 
-  train forest:
+  train_forest:
     cmd: python src/random_forest.py data/preprocessed/train/train.csv data/preprocessed/test/test.csv
     deps:
       - src/random_forest.py

@@ -66,7 +66,7 @@ def train(X_train, X_test, y_train, y_test):
 
 def main():
     # Set the experiment name
-    mlflow.set_experiment("Random Forest Regression")
+    mlflow.set_experiment("support_vector_machine")
 
     # Check if there are enough command line arguments
     if len(sys.argv) != 3:

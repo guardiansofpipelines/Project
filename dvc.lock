@@ -40,3 +40,18 @@ stages:
       hash: md5
       md5: 31fbe626f5197f018770f669b3ca219b
       size: 2655
+  train_svr:
+    cmd: python src/SVR.py data/preprocessed/train/train.csv data/preprocessed/test/test.csv
+    deps:
+    - path: data/preprocessed/test/test.csv
+      hash: md5
+      md5: 3ae7697249fe55c16e181949d56193be
+      size: 54252
+    - path: data/preprocessed/train/train.csv
+      hash: md5
+      md5: b84486a19257cd97445706b7bb359e6f
+      size: 126539
+    - path: src/SVR.py
+      hash: md5
+      md5: 6b0969f98e4c5aef6f0df08bca1dfaa2
+      size: 2705

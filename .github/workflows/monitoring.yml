@@ -48,7 +48,7 @@ jobs:
         env:
           GDRIVE_CREDENTIALS_DATA: ${{secrets.GDRIVE_CREDENTIALS}}
         run: |
-          dvc push --force
+          dvc push
           
       - name: Commit changes to Git
         run: |

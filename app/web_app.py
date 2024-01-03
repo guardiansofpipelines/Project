@@ -4,26 +4,8 @@ import pandas as pd
 import mlflow
 from io import StringIO
 
-# Set tracking URI
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
-
-# Specify the experiment name and model name
-experiment_name = "Random Forest Regression"
-model_name = "random_forest_model"
-
-# Initialize MLflow
-mlflow.set_experiment(experiment_name)
-
-# Get the latest run ID within the experiment
-latest_run = mlflow.search_runs(
-    experiment_ids=mlflow.get_experiment_by_name(experiment_name).experiment_id,
-    order_by=["start_time DESC"],
-    max_results=1
-).iloc[0]
-run_id = latest_run.run_id
-
 # Load the MLflow model
-model = mlflow.sklearn.load_model(f"runs:/{run_id}/{model_name}")
+model = mlflow.sklearn.load_model(f"random_forest_model")
 
 # Create the Flask application
 app = Flask(__name__)
@@ -49,7 +31,9 @@ def predict():
 
                 # Preprocess the input data
                 df = pd.DataFrame(data)
-
+            
+            # drop column timestamp and reading
+            df = df.drop(['Timestamp', 'Reading'], axis=1)
             # Make predictions using the loaded model
             predictions = model.predict(df)
 

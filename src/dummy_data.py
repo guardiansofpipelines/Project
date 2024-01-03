@@ -59,15 +59,15 @@ if __name__ == "_main_":
     choice = sys.argv[2]
     data_file_path = output_path+"/"+'dummy_sensor_data.csv'
     # Define date range for dummy data
-start_date = datetime(2023, 1, 1)
-end_date = datetime(2023, 1, 10)
+    start_date = datetime(2023, 1, 1)
+    end_date = datetime(2023, 1, 10)
 
-# Generate dummy data
-if (choice == 'create'):
-    print("Creating dummy data")
-    dummy_data = generate_dummy_data(start_date, end_date, num_machines=5, num_sensors=3)
-    dummy_data.to_csv(data_file_path, index=False)
+    # Generate dummy data
+    if (choice == 'create'):
+        print("Creating dummy data")
+        dummy_data = generate_dummy_data(start_date, end_date, num_machines=5, num_sensors=3)
+        dummy_data.to_csv(data_file_path, index=False)
 
-elif(choice == 'append'):
-    print("Appending data")
-    generate_and_append_data(data_file_path)
+    elif(choice == 'append'):
+        print("Appending data")
+        generate_and_append_data(data_file_path)

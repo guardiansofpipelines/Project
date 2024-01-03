@@ -5,16 +5,15 @@ stages:
     deps:
     - path: src/dummy_data.py
       hash: md5
-      md5: e207e6b19d7e3e99beea461dfb487198
-      size: 2770
+      md5: 806ee85e3783df0a7fbc80250f34edcd
+      size: 2808
   append:
     cmd: python src/dummy_data.py data/dummy_data append
     deps:
     - path: src/dummy_data.py
       hash: md5
-      md5: e207e6b19d7e3e99beea461dfb487198
-      size: 2770
-      
+      md5: 806ee85e3783df0a7fbc80250f34edcd
+      size: 2808
   preprocess:
     cmd: python src/datapreprocessing.py data/preprocessed/train/ data/preprocessed/test/
     deps:
@@ -31,12 +30,12 @@ stages:
     deps:
     - path: data/preprocessed/test/test.csv
       hash: md5
-      md5: f711a7846490d3a81f154fc9e0040db2
-      size: 54272
+      md5: 3ae7697249fe55c16e181949d56193be
+      size: 54252
     - path: data/preprocessed/train/train.csv
       hash: md5
-      md5: f72aacf8adf50f7fbe493642bbbb74e2
-      size: 126569
+      md5: b84486a19257cd97445706b7bb359e6f
+      size: 126539
     - path: src/random_forest.py
       hash: md5
       md5: 31fbe626f5197f018770f669b3ca219b

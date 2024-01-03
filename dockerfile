@@ -22,4 +22,4 @@ EXPOSE 5001
 
 # Define the command to run the flask app when the container starts
 
-CMD ["python", "web_app.py"]
+CMD dvc pull --force && python /app/web_app.py

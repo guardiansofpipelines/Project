@@ -5,3 +5,5 @@ data/preprocessed/test/test.csv
 data/preprocessed/train/train.csv
 mlartifacts/
 random_forest_model/
+/random_forest_model
+.dvc/google_cloud_credentials.json

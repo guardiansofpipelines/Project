@@ -1,8 +1,9 @@
+import shutil
+import os
 import mlflow
 import mlflow.sklearn
-from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR  # Add this line
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error,mean_absolute_error,r2_score
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import sys
@@ -51,18 +52,29 @@ def train(X_train, X_test, y_train, y_test):
         # Make predictions on the test set
         y_pred = model.predict(X_test)
 
-        # Evaluate the model
+        # Calculate evaluation metrics
         mse = mean_squared_error(y_test, y_pred)
+        mae = mean_absolute_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
 
         # Log model parameters and metrics using MLflow
         mlflow.log_params(model.get_params())
         mlflow.log_metric("mse", mse)
+        mlflow.log_metric("mae", mae)
+        mlflow.log_metric("r2", r2)
+
+        # Remove the existing 'svm_model' directory if it exists
+        if os.path.exists("svm_model"):
+            shutil.rmtree("svm_model")
 
         # Save the model with MLflow
         mlflow.sklearn.log_model(model, "svm_model")
+
+        # Print evaluation metrics
+        print("Mean Squared Error (MSE):", mse)
+        print("Mean Absolute Error (MAE):", mae)
+        print("R2 Score:", r2)
         
-        # Optionally save the model in a specific format using sklearn's save_model
-        mlflow.sklearn.save_model(model, "svm_model")
 
 def main():
     # Set the experiment name
@@ -84,5 +96,5 @@ def main():
     
     print("Done")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

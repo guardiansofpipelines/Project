@@ -1,0 +1,61 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: concept drift monitoring
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 */6 * * *'  # Runs every 6 hour
+
+jobs:
+  run:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11.0
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Pull data from DVC remote
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{secrets.GDRIVE_CREDENTIALS}}
+        run: |
+          dvc pull --force
+
+      - name: Run DVC repro
+        run: |
+          dvc repro
+          
+      - name: Git credentials
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "Github Actions"
+
+      - name: DVC Add
+        run: |
+          dvc add data/dummy_sensor_data.csv
+
+      - name: Push data to DVC remote
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{secrets.GDRIVE_CREDENTIALS}}
+        run: |
+          dvc push --force
+          
+      - name: Commit changes to Git
+        run: |
+          git add .
+          git commit -m "Update data"
+          git push origin main

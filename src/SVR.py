@@ -10,7 +10,7 @@ import sys
 
 
 # Set tracking URI
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+# mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
 # Load dataset
 def load_data(train_file_path, test_file_path):
@@ -67,6 +67,7 @@ def train(X_train, X_test, y_train, y_test):
         if os.path.exists("svm_model"):
             shutil.rmtree("svm_model")
 
+        mlflow.set_tag("svm model", mlflow.active_run().info.run_id)
         # Save the model with MLflow
         mlflow.sklearn.log_model(model, "svm_model")
 
@@ -76,9 +77,10 @@ def train(X_train, X_test, y_train, y_test):
         print("R2 Score:", r2)
         
 
+
 def main():
     # Set the experiment name
-    mlflow.set_experiment("Random Forest Regression")
+    mlflow.set_experiment("support_vector_machine")
 
     # Check if there are enough command line arguments
     if len(sys.argv) != 3:
@@ -96,5 +98,5 @@ def main():
     
     print("Done")
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     main()

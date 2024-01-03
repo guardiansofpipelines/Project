@@ -20,3 +20,12 @@ stages:
       - src/random_forest.py
       - data/preprocessed/train/train.csv
       - data/preprocessed/test/test.csv
+
+  train_svr:
+    cmd: python src/SVR.py data/preprocessed/train/train.csv data/preprocessed/test/test.csv
+    deps:
+    - src/SVR.py
+    - data/preprocessed/train/train.csv
+    - data/preprocessed/test/test.csv
+
+  

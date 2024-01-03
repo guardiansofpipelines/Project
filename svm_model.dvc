@@ -1,0 +1,6 @@
+outs:
+- md5: c95e4992aa0aad68cc7aa36873a6e450.dir
+  size: 43888
+  nfiles: 5
+  hash: md5
+  path: svm_model

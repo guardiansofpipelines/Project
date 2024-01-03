@@ -3,3 +3,4 @@
 ['remote "guardiansofpipelines"']
     url = gdrive://1ZM8UqucJ4akhO7-TEgL1nTP_qudVNqsX
     gdrive_acknowledge_abuse = true
+    gdrive_use_service_account = true

@@ -37,7 +37,7 @@ jobs:
 
       - name: Run DVC repro
         run: |
-          dvc repro
+          dvc repro --force
           
       - name: Git credentials
         run: |

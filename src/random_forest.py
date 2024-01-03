@@ -5,6 +5,8 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import sys
+import os
+import shutil
 
 # Set tracking URI
 # mlflow.set_tracking_uri("http://127.0.0.1:5000")
@@ -68,6 +70,10 @@ def train(X_train, X_test, y_train, y_test):
         # Save the model with MLflow
         mlflow.sklearn.log_model(model, "random_forest_model")
         
+        #check if folder already exists then delete it
+        if os.path.exists("random_forest_model"):
+            shutil.rmtree("random_forest_model")
+
         # Optionally save the model in a specific format using sklearn's save_model
         mlflow.sklearn.save_model(model, "random_forest_model")
 

@@ -38,8 +38,8 @@ stages:
       size: 126539
     - path: src/random_forest.py
       hash: md5
-      md5: 08b448269d2182e911268815873b3e77
-      size: 3053
+      md5: dd1ab2dcf129d2a3a5e8cf276c8b4bd5
+      size: 3238
   train_svr:
     cmd: python src/SVR.py data/preprocessed/train/train.csv data/preprocessed/test/test.csv
     deps:

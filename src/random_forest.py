@@ -77,6 +77,11 @@ def train(X_train, X_test, y_train, y_test):
         # Optionally save the model in a specific format using sklearn's save_model
         mlflow.sklearn.save_model(model, "random_forest_model")
 
+        # append metrics into a csv file with its column name
+        df = pd.DataFrame([[mse, mae, r2]], columns=['mse', 'mae', 'r2'])
+        df.to_csv('metrics.csv', mode='a', header=False, index=False)
+         
+
 def main():
     # Set the experiment name
     mlflow.set_experiment("Random Forest Regression")

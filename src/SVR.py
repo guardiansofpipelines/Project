@@ -77,7 +77,10 @@ def train(X_train, X_test, y_train, y_test):
         print("Mean Absolute Error (MAE):", mae)
         print("R2 Score:", r2)
         
-
+        # append metrics into a csv file with its column name
+        df = pd.DataFrame([[mse, mae, r2]], columns=['mse', 'mae', 'r2'])
+        df.to_csv('metrics.csv', mode='a', header=False, index=False)
+        
 
 def main():
     # Set the experiment name

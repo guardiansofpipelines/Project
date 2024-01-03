@@ -1,0 +1,6 @@
+outs:
+- md5: 2a170cb7827418dadfce3af0bc81a30f.dir
+  size: 1871314
+  nfiles: 5
+  hash: md5
+  path: random_forest_model

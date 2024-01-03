@@ -9,7 +9,7 @@ import sys
 
 
 # Set tracking URI
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+# mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
 # Load dataset
 def load_data(train_file_path, test_file_path):
@@ -58,11 +58,13 @@ def train(X_train, X_test, y_train, y_test):
         mlflow.log_params(model.get_params())
         mlflow.log_metric("mse", mse)
 
+        mlflow.set_tag("svm model", mlflow.active_run().info.run_id)
         # Save the model with MLflow
         mlflow.sklearn.log_model(model, "svm_model")
         
         # Optionally save the model in a specific format using sklearn's save_model
         mlflow.sklearn.save_model(model, "svm_model")
+
 
 def main():
     # Set the experiment name

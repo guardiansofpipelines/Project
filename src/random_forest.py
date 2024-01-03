@@ -7,7 +7,7 @@ import pandas as pd
 import sys
 
 # Set tracking URI
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+# mlflow.set_tracking_uri("http://127.0.0.1:5000")
 
 # Load dataset
 def load_data(train_file_path, test_file_path):
@@ -59,6 +59,7 @@ def train(X_train, X_test, y_train, y_test):
         mlflow.log_metric("mse", mse)
         mlflow.log_metric("mae", mae)
         mlflow.log_metric("r2", r2)
+        mlflow.set_tag("random_forest", mlflow.active_run().info.run_id)
 
         print("Mean Squared Error: ", mse)
         print("Mean Absolute Error: ", mae)

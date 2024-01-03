@@ -68,6 +68,7 @@ def train(X_train, X_test, y_train, y_test):
             shutil.rmtree("svm_model")
 
         mlflow.set_tag("svm model", mlflow.active_run().info.run_id)
+
         # Save the model with MLflow
         mlflow.sklearn.log_model(model, "svm_model")
 

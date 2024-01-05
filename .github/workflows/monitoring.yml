@@ -38,20 +38,30 @@ jobs:
       - name: Run DVC repro
         run: |
           dvc repro --force
-          
-      - name: Git credentials
+
+      - name: Open metrics file and compare last two values
+        id: metrics_comparison
+        run: |
+          latest_mse=$(tail -n 1 metrics.csv | cut -d',' -f1)
+          previous_mse=$(tail -n 2 metrics.csv | head -n 1 | cut -d',' -f1)
+          if (( $(echo "$latest_mse < $previous_mse" | bc -l) )); then
+            echo "Setting RETRAIN to true"
+            echo "RETRAIN=true" >> $GITHUB_OUTPUT
+          else
+            echo "Setting RETRAIN to false"
+            echo "RETRAIN=false" >> $GITHUB_OUTPUT
+          fi
+        
+      - name: Git and Dvc Push
+        if: ${{ steps.metrics_comparison.outputs.RETRAIN }} == true
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS }}
         run: |
           git config --global user.email "actions@github.com"
-          git config --global user.name "Github Actions"
-
-      - name: Push data to DVC remote
-        env:
-          GDRIVE_CREDENTIALS_DATA: ${{secrets.GDRIVE_CREDENTIALS}}
-        run: |
-          dvc push
+          git config --global user.name "GitHub Actions"
           
-      - name: Commit changes to Git
-        run: |
-          git add .
-          git commit -m "Update data"
-          git push origin main
+          git add . 
+          git commit -m "Drift detected. Retraining model."
+          
+          dvc push
+          git push

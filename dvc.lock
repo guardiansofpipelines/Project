@@ -15,7 +15,8 @@ stages:
       md5: c35e1e5e11f7df7f769fe774e7b049c8
       size: 2736
   preprocess:
-    cmd: python src/datapreprocessing.py data/preprocessed/train/ data/preprocessed/test/
+    cmd: python src/datapreprocessing.py data/preprocessed/train/ 
+      data/preprocessed/test/
     deps:
     - path: data/dummy_data/dummy_sensor_data.csv
       hash: md5
@@ -26,7 +27,8 @@ stages:
       md5: 9adde839df3de3851939fa6fc22a89ce
       size: 2769
   train_forest:
-    cmd: python src/random_forest.py data/preprocessed/train/train.csv data/preprocessed/test/test.csv
+    cmd: python src/random_forest.py data/preprocessed/train/train.csv 
+      data/preprocessed/test/test.csv
     deps:
     - path: data/preprocessed/test/test.csv
       hash: md5
@@ -41,7 +43,8 @@ stages:
       md5: 15c82dc0792ddfc2de081d44bf335db3
       size: 3354
   train_svr:
-    cmd: python src/SVR.py data/preprocessed/train/train.csv data/preprocessed/test/test.csv
+    cmd: python src/SVR.py data/preprocessed/train/train.csv 
+      data/preprocessed/test/test.csv
     deps:
     - path: data/preprocessed/test/test.csv
       hash: md5
